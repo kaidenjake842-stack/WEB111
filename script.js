@@ -121,6 +121,20 @@ const updates = [
       "Custom accent colors",
       "Glow and animation controls"
     ]
+  },
+
+  {
+    version: "v1.2.1",
+    tag: "NEW",
+    pinned: false,
+
+  title: "New Leasson! DataStores Basics Part 2| AutoSaving!",
+
+    description: "You can now learn how autosaves works!",
+
+    changes: [
+      "New Leasson!"
+    ]
   }
 ];
 
@@ -149,6 +163,57 @@ const lessons = [
 
     code:
       'local ReplicatedStorage = game:GetService("ReplicatedStorage")\nlocal event = ReplicatedStorage:WaitForChild("MyEvent")\n\nevent:FireServer("Hello")'
+  },
+
+  {
+    id: "datastore-autosave",
+
+    title: "DataStore Basics Part 2| AutoSaving",
+
+    category: "DataStores",
+
+    difficulty: "Advanced",
+
+    minutes: 9,
+
+    summary: "Learn how to automatically save player data while the server is running.",
+
+    content: `
+    Autosaving helps reduce t he chance of losing player progress.
+
+    Instead of only saving when the player leaves, the server can periodically save all connected players.
+
+    A common autosave interval is around 60 seconds.
+
+    You should still save when:
+    - The player leaves
+    - The server shuts down
+    - Important progress changes, when appropriate.
+
+    Avoid saving too often because DataStore requests have limits.
+    `.trim(),
+
+    code: `local player = game:GetService("Players") 
+    
+    local AUTOSAVE_TIME = 60
+
+    while true do
+
+    task.waiot(
+     AUTOSAVE_TIME
+    )
+
+    for _, players in ipairs(
+      Players:GetPlayers()
+    ) do
+     
+
+    savePlayer(
+      player
+    )
+    end
+   end
+    `
   },
 
   {
