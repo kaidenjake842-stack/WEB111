@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Asset Hub</title>
+  <meta name="description" content="Asset Hub — Roblox assets, tutorials, updates, premium resources, and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="shell nav">
+    <a href="#" class="brand">
+      <div class="brand-mark">A</div>
+      <span>Asset Hub</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#featured">Featured</a>
+      <a href="#categories">Categories</a>
+      <a href="#assets">Assets</a>
+      <a href="#coming-soon">Coming Soon</a>
+      <a href="#updates">Updates</a>
+      <a href="#learn">Learn</a>
+      <a href="#creators">Creators</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="theme-button" id="openThemePanel" type="button" aria-label="Open theme settings">🎨</button>
+      <a class="nav-button" href="#assets">Explore Assets</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div>
+        <div class="eyebrow">Roblox Creator Marketplace</div>
+        <h1>Build faster with better assets.</h1>
+        <p>Discover Roblox systems, UI, scripts, models, effects, tutorials, and creator resources. No account or backend required.</p>
+
+        <div class="hero-actions">
+          <a class="button primary" href="#assets">Browse Assets</a>
+          <a class="button secondary" href="#learn">Learning Center</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><strong>12</strong><span>ASSETS</span></div>
+          <div class="stat"><strong>6</strong><span>CATEGORIES</span></div>
+          <div class="stat"><strong>3</strong><span>TUTORIALS</span></div>
+          <div class="stat"><strong>3</strong><span>UPCOMING</span></div>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <h3>🔥 Trending this week</h3>
+        <div class="hero-list">
+          <div class="hero-item"><strong>Advanced Loading Screen</strong><span>Featured</span></div>
+          <div class="hero-item"><strong>Overhead Nametag System</strong><span>Staff Pick</span></div>
+          <div class="hero-item"><strong>Gamepass Shop UI</strong><span>Premium</span></div>
+          <div class="hero-item"><strong>Trail & Halo System</strong><span>Popular</span></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="featured">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Discover</div>
+          <h2>Featured & Trending</h2>
+          <p>Popular picks and highlighted releases.</p>
+        </div>
+      </div>
+
+      <div class="featured-grid">
+        <article class="featured-card">
+          <div class="featured-art">🔥</div>
+          <div class="featured-body">
+            <span class="pill premium">TRENDING</span>
+            <h3>Advanced Loading Screen</h3>
+            <p>Animated loading flow with progress and polished effects.</p>
+          </div>
+        </article>
+
+        <article class="featured-card">
+          <div class="featured-art">🏷️</div>
+          <div class="featured-body">
+            <span class="pill free">STAFF PICK</span>
+            <h3>Overhead Nametag System</h3>
+            <p>Ranks, titles, gradients, icons, and more.</p>
+          </div>
+        </article>
+
+        <article class="featured-card">
+          <div class="featured-art">✨</div>
+          <div class="featured-body">
+            <span class="pill premium">POPULAR</span>
+            <h3>Trail & Halo System</h3>
+            <p>Equipables, progression, unlocks, and multipliers.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="categories">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Browse</div>
+          <h2>Categories</h2>
+          <p>Jump straight into the type of asset you need.</p>
+        </div>
+      </div>
+
+      <div class="category-grid">
+        <button class="category-card active" data-category="all"><span>📦</span><strong>All Assets</strong><small>Browse everything</small></button>
+        <button class="category-card" data-category="UI"><span>🎨</span><strong>UI</strong><small>Interfaces & menus</small></button>
+        <button class="category-card" data-category="Systems"><span>⚙️</span><strong>Systems</strong><small>Full game systems</small></button>
+        <button class="category-card" data-category="Scripts"><span>📜</span><strong>Scripts</strong><small>Lua templates</small></button>
+        <button class="category-card" data-category="Effects"><span>✨</span><strong>Effects</strong><small>Visual effects</small></button>
+        <button class="category-card" data-category="Models"><span>🧱</span><strong>Models</strong><small>Props & builds</small></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="assets">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Marketplace</div>
+          <h2>Explore Assets</h2>
+          <p>Search, filter, preview, and open asset links.</p>
+        </div>
+      </div>
+
+      <div class="asset-tools">
+        <input class="control" id="assetSearch" type="search" placeholder="Search assets...">
+
+        <select class="control" id="categoryFilter">
+          <option value="all">All Categories</option>
+          <option value="UI">UI</option>
+          <option value="Systems">Systems</option>
+          <option value="Scripts">Scripts</option>
+          <option value="Effects">Effects</option>
+          <option value="Models">Models</option>
+          <option value="Bundles">Bundles</option>
+        </select>
+
+        <select class="control" id="typeFilter">
+          <option value="all">Free + Premium</option>
+          <option value="FREE">Free</option>
+          <option value="PREMIUM">Premium</option>
+        </select>
+      </div>
+
+      <div class="asset-count" id="assetCount"></div>
+      <div class="asset-grid" id="assetGrid"></div>
+    </div>
+  </section>
+
+  <section id="coming-soon">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Upcoming Drops</div>
+          <h2>Coming Soon</h2>
+          <p>Live countdowns update automatically.</p>
+        </div>
+      </div>
+
+      <div class="countdown-grid" id="countdownGrid"></div>
+    </div>
+  </section>
+
+  <section id="updates">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Changelog</div>
+          <h2>Update Log</h2>
+          <p>See what changed across Asset Hub.</p>
+        </div>
+      </div>
+
+      <div class="updates-list" id="updatesList"></div>
+    </div>
+  </section>
+
+  <section id="learn">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Learning Center</div>
+          <h2>Learn Roblox development</h2>
+          <p>Quick lessons with examples and code snippets.</p>
+        </div>
+      </div>
+
+      <div class="learning-tools">
+        <input class="control" id="lessonSearch" type="search" placeholder="Search tutorials...">
+
+        <select class="control" id="lessonCategoryFilter">
+          <option value="all">All Categories</option>
+          <option value="Roblox Scripting">Roblox Scripting</option>
+          <option value="DataStores">DataStores</option>
+          <option value="UI Design">UI Design</option>
+        </select>
+      </div>
+
+      <div class="lesson-grid" id="lessonGrid"></div>
+    </div>
+  </section>
+
+  <section id="creators">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Community</div>
+          <h2>Featured Creators</h2>
+          <p>Showcase the people building assets for the hub.</p>
+        </div>
+      </div>
+
+      <div class="creator-grid">
+        <article class="creator-card">
+          <div class="creator-top">
+            <div class="avatar">J</div>
+            <div>
+              <h3>Jaiden</h3>
+              <div class="badge-row">
+                <span class="pill owner">OWNER</span>
+                <span class="pill creator">CREATOR</span>
+              </div>
+            </div>
+          </div>
+          <p>Roblox systems, interfaces, developer tools, and marketplace features.</p>
+        </article>
+
+        <article class="creator-card">
+          <div class="creator-top">
+            <div class="avatar">A</div>
+            <div>
+              <h3>Asset Hub Design</h3>
+              <div class="badge-row"><span class="pill creator">CREATOR</span></div>
+            </div>
+          </div>
+          <p>UI packs, gradients, loading screens, cards, and modern visual design.</p>
+        </article>
+
+        <article class="creator-card">
+          <div class="creator-top">
+            <div class="avatar">C</div>
+            <div>
+              <h3>Community Studio</h3>
+              <div class="badge-row"><span class="pill verified">VERIFIED</span></div>
+            </div>
+          </div>
+          <p>Models, effects, props, and polished assets for Roblox experiences.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="shell">© 2026 Asset Hub • GitHub Pages Version</div>
+</footer>
+
+<div class="theme-overlay hidden" id="themeOverlay"></div>
+
+<aside class="theme-panel" id="themePanel" aria-hidden="true">
+  <div class="theme-panel-head">
+    <div>
+      <div class="eyebrow">Appearance</div>
+      <h2>Customize Theme</h2>
+      <p>Changes save automatically.</p>
+    </div>
+    <button class="theme-close" id="closeThemePanel" type="button">×</button>
+  </div>
+
+  <div class="theme-section">
+    <span class="theme-label">THEME</span>
+    <div class="theme-choice-grid">
+      <button class="theme-choice active" data-theme="dark" type="button">Dark</button>
+      <button class="theme-choice" data-theme="midnight" type="button">Midnight</button>
+      <button class="theme-choice" data-theme="light" type="button">Light</button>
+    </div>
+  </div>
+
+  <div class="theme-section">
+    <span class="theme-label">ACCENT</span>
+    <div class="accent-grid">
+      <button class="accent-dot" data-accent="#53d6ff" style="--swatch:#53d6ff"></button>
+      <button class="accent-dot" data-accent="#8b6cff" style="--swatch:#8b6cff"></button>
+      <button class="accent-dot" data-accent="#63e6be" style="--swatch:#63e6be"></button>
+      <button class="accent-dot" data-accent="#ff6b8a" style="--swatch:#ff6b8a"></button>
+      <button class="accent-dot" data-accent="#ff9f43" style="--swatch:#ff9f43"></button>
+      <button class="accent-dot" data-accent="#ff5f5f" style="--swatch:#ff5f5f"></button>
+    </div>
+
+    <label class="setting-row">
+      <span>
+        <strong>Custom Color</strong>
+        <small>Pick any accent color.</small>
+      </span>
+      <input id="customAccent" type="color" value="#53d6ff">
+    </label>
+  </div>
+
+  <div class="theme-section">
+    <span class="theme-label">EFFECTS</span>
+
+    <label class="setting-row">
+      <span>
+        <strong>Glow Effects</strong>
+        <small>Background glow effects.</small>
+      </span>
+      <input id="glowToggle" type="checkbox" checked>
+    </label>
+
+    <label class="setting-row">
+      <span>
+        <strong>Animations</strong>
+        <small>Hover and transition animations.</small>
+      </span>
+      <input id="animationToggle" type="checkbox" checked>
+    </label>
+  </div>
+
+  <button class="reset-button" id="resetThemeButton" type="button">Reset Appearance</button>
+</aside>
+
+<div class="modal hidden" id="assetModal">
+
+  <div class="modal-card">
+
+    <!-- CLOSE BUTTON -->
+    <button
+      class="modal-close"
+      id="closeAssetModal"
+      type="button"
+      onclick="closeAssetModal()"
+    >
+      ×
+    </button>
+
+
+    <!-- ICON -->
+    <div
+      class="modal-icon"
+      id="assetModalIcon"
+    >
+      📦
+    </div>
+
+
+    <!-- BADGES -->
+    <div
+      class="badge-row"
+      id="assetModalBadges"
+    ></div>
+
+
+    <!-- TITLE -->
+    <h2 id="assetModalTitle">
+      Asset
+    </h2>
+
+
+    <!-- DESCRIPTION -->
+    <p id="assetModalDescription"></p>
+
+
+    <!-- DETAILS -->
+    <div class="detail-grid">
+
+      <div>
+        <span>Category</span>
+        <strong id="assetModalCategory"></strong>
+      </div>
+
+      <div>
+        <span>Access</span>
+        <strong id="assetModalType"></strong>
+      </div>
+
+    </div>
+
+
+    <!-- GET ASSET -->
+    <a
+      class="button primary full-width"
+      id="assetGetButton"
+      href="#"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Get Asset
+    </a>
+
+  </div>
+
+</div>
+
+
+
+<div class="modal hidden" id="lessonModal">
+  <div class="modal-card large">
+    <button class="modal-close" id="closeLessonModal" type="button">×</button>
+    <div class="badge-row" id="lessonModalMeta"></div>
+    <h2 id="lessonModalTitle">Lesson</h2>
+    <p id="lessonModalSummary"></p>
+    <div class="lesson-content" id="lessonModalContent"></div>
+
+    <div class="code-block hidden" id="lessonCodeBlock">
+      <div class="code-head">
+        <strong>Example Code</strong>
+        <button class="small-button" id="copyLessonCode" type="button">Copy Code</button>
+      </div>
+      <pre><code id="lessonModalCode"></code></pre>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
