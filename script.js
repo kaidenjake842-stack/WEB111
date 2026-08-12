@@ -128,12 +128,13 @@ const updates = [
     tag: "NEW",
     pinned: false,
 
-  title: "New Leasson! DataStores Basics Part 2| AutoSaving!",
+  title: "New Leasson! DataStores Basics Part 2| AutoSaving! + New Category: Maps",
 
     description: "You can now learn how autosaves works!",
 
     changes: [
-      "New Leasson!"
+      "New Leasson!",
+      "New Category: Maps"
     ]
   }
 ];
