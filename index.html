@@ -417,20 +417,39 @@
 
 <div class="modal hidden" id="lessonModal">
   <div class="modal-card large">
-    <button class="modal-close" id="closeLessonModal" type="button">×</button>
-    <div class="badge-row" id="lessonModalMeta"></div>
-    <h2 id="lessonModalTitle">Lesson</h2>
-    <p id="lessonModalSummary"></p>
-    <div class="lesson-content" id="lessonModalContent"></div>
 
-    <div class="code-block hidden" id="lessonCodeBlock">
-      <div class="code-head">
-        <strong>Example Code</strong>
-        <button class="small-button" id="copyLessonCode" type="button">Copy Code</button>
-      </div>
-      <pre><code id="lessonModalCode"></code></pre>
-    </div>
+    <button
+      class="modal-close"
+      id="closeLessonModal"
+      type="button"
+    >
+      ×
+    </button>
+
+    <div
+      class="badge-row"
+      id="lessonModalMeta"
+    ></div>
+
+    <h2 id="lessonModalTitle">
+      Lesson
+    </h2>
+
+    <p id="lessonModalSummary"></p>
+
+    <div
+      class="lesson-content"
+      id="lessonModalContent"
+    ></div>
+
+    <!-- Unlimited lesson code blocks render here -->
+    <div
+      class="lesson-code-list"
+      id="lessonCodeList"
+    ></div>
+
   </div>
+</div>
 </div>
 
 <script src="script.js"></script>
