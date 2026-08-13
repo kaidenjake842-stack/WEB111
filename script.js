@@ -3,7 +3,7 @@
 // No backend required
 // =========================================================
 
-const { version } = require("react");
+
 
 
 // =========================================================
@@ -146,8 +146,8 @@ const updates = [
     description: "You can now learn how autosaves works!",
 
     changes: [
-      "New Leasson!",
-      "New Category: Maps"
+      "New Asset",
+      "New Category Map!"
     ]
   },
 
@@ -160,9 +160,23 @@ const updates = [
 
     description: "New Asset and a new coming soon item!",
 
-    change: [
+    changes: [
       "New Asset",
       "New Coming Soon Item!"
+    ]
+  },
+
+  {
+    version: "v1.2.3",
+    tag: "FIX",
+    pinned: false,
+
+    title: "Bug Fixes!",
+
+    description: "The Development team has found an bug and fixed it.",
+
+    changes: [
+      "Bug Fixes"
     ]
   }
 ];
@@ -222,27 +236,17 @@ const lessons = [
     Avoid saving too often because DataStore requests have limits.
     `.trim(),
 
-    code: `local player = game:GetService("Players") 
-    
-    local AUTOSAVE_TIME = 60
+    code: `local Players = game:GetService("Players")
 
-    while true do
+local AUTOSAVE_TIME = 60
 
-    task.waiot(
-     AUTOSAVE_TIME
-    )
+while true do
+    task.wait(AUTOSAVE_TIME)
 
-    for _, players in ipairs(
-      Players:GetPlayers()
-    ) do
-     
-
-    savePlayer(
-      player
-    )
+    for _, player in ipairs(Players:GetPlayers()) do
+        savePlayer(player)
     end
-   end
-    `
+end`
   },
 
   {
