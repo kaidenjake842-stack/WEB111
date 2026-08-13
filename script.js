@@ -3,6 +3,8 @@
 // No backend required
 // =========================================================
 
+const { version } = require("react");
+
 
 // =========================================================
 // ASSETS
@@ -78,6 +80,17 @@ const assets = [
     description:
       "Run server events, announcements, and controls from one polished panel.",
     link: "https://example.com/admin-event-panel"
+  },
+
+  {
+    id: 7,
+    name: "Non-Saving Cash Leaderstats",
+    icon: "💵",
+    type: "FREE",
+    tag: "NEW",
+    category: "Scripts",
+    description: "A non-saving free cash leaderstats file!",
+    link: ""
   }
 ];
 
@@ -135,6 +148,21 @@ const updates = [
     changes: [
       "New Leasson!",
       "New Category: Maps"
+    ]
+  },
+
+  {
+    version: "v1.2.2",
+    tag: "NEW",
+    pinned: false,
+
+    title: "Added new asset! + Added a new coming soon item!",
+
+    description: "New Asset and a new coming soon item!",
+
+    change: [
+      "New Asset",
+      "New Coming Soon Item!"
     ]
   }
 ];
@@ -277,6 +305,16 @@ const comingSoonDrops = [
       "2026-08-15T18:00:00-04:00"
   },
 
+  {
+    title: "Hangout Map",
+
+    icon: "🗺️",
+
+    description:
+    "An paid hangout map for yall!",
+
+    releaseAt: "2026-08-30T22:00:00-04:00"
+  },
   {
     title: "Simulator Starter Pack",
 
