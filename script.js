@@ -90,7 +90,7 @@ const assets = [
     tag: "NEW",
     category: "Scripts",
     description: "A non-saving free cash leaderstats file!",
-    link: ""
+    link: "https://drive.google.com/file/d/1yZHU7Rv19dkUzpwLBqGxPpAk4TNH-T1k/view"
   }
 ];
 
@@ -190,7 +190,7 @@ const lessons = [
   {
     id: "remotes",
 
-    title: "Understanding RemoteEvents",
+    title: "Remote Events Part 1| Understanding RemoteEvents",
 
     category: "Roblox Scripting",
 
@@ -247,6 +247,153 @@ while true do
         savePlayer(player)
     end
 end`
+  },
+
+  {
+    id: "remote-events",
+
+    title: "Remote Events Part 2 | Sending Arguments",
+
+    category: "Roblox Scripting",
+
+    difficulty: "Intermediate",
+
+    minutes: 7,
+
+    summary:
+      "Learn how to send information between the client and server using RemoteEvents.",
+
+    content: `
+RemoteEvents can send extra information called arguments.
+
+The client sends arguments using:
+
+RemoteEvent:FireServer(...)
+
+The server receives those arguments through:
+
+RemoteEvent.OnServerEvent
+
+The first argument received by OnServerEvent is always the player who fired the RemoteEvent.
+
+For example:
+
+Client sends:
+"BlueTrail"
+
+Server receives:
+player, "BlueTrail"
+
+You can send:
+- Strings
+- Numbers
+- Booleans
+- Tables
+- Instances
+- Vector3 values
+- Color3 values
+
+You can also send multiple arguments at the same time.
+
+IMPORTANT:
+Never trust important information sent by the client.
+
+For example, the client can send the item name, but the server should determine trusted information such as the real price.
+    `.trim(),
+
+    codes: [
+      {
+        title: "Create the RemoteEvent",
+        language: "lua",
+
+        code: `local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local BuyItemEvent = Instance.new("RemoteEvent")
+BuyItemEvent.Name = "BuyItemEvent"
+BuyItemEvent.Parent = ReplicatedStorage`
+      },
+
+      {
+        title: "Client Code",
+        language: "lua",
+
+        code: `local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local BuyItemEvent =
+    ReplicatedStorage:WaitForChild("BuyItemEvent")
+
+local itemName = "BlueTrail"
+
+BuyItemEvent:FireServer(itemName)`
+      },
+
+      {
+        title: "Server Code",
+        language: "lua",
+
+        code: `local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local BuyItemEvent =
+    ReplicatedStorage:WaitForChild("BuyItemEvent")
+
+local Items = {
+    BlueTrail = {
+        Price = 500
+    },
+
+    RedTrail = {
+        Price = 750
+    }
+}
+
+BuyItemEvent.OnServerEvent:Connect(function(player, itemName)
+
+    local item = Items[itemName]
+
+    if not item then
+        warn("Invalid item:", itemName)
+        return
+    end
+
+    print(player.Name, "requested", itemName)
+
+end)`
+      },
+
+      {
+        title: "Sending Multiple Arguments",
+        language: "lua",
+
+        code: `local itemName = "BlueTrail"
+local quantity = 1
+local equipped = true
+
+BuyItemEvent:FireServer(
+    itemName,
+    quantity,
+    equipped
+)`
+      },
+
+      {
+        title: "Receiving Multiple Arguments",
+        language: "lua",
+
+        code: `BuyItemEvent.OnServerEvent:Connect(function(
+    player,
+    itemName,
+    quantity,
+    equipped
+)
+
+    print("Player:", player.Name)
+    print("Item:", itemName)
+    print("Quantity:", quantity)
+    print("Equipped:", equipped)
+
+end)`
+      }
+    ]
   },
 
   {
@@ -1506,7 +1653,7 @@ function renderLessons() {
 
       const searchText = `
         ${lesson.title}
-        ${lesson.summary}
+        ${lesson.summary || ""}
         ${lesson.category}
         ${lesson.difficulty}
       `.toLowerCase();
@@ -1550,7 +1697,7 @@ function renderLessons() {
               </span>
 
               <span>
-                ${lesson.minutes} min
+                ${lesson.minutes || 0} min
               </span>
 
             </div>
@@ -1562,7 +1709,7 @@ function renderLessons() {
 
 
             <p>
-              ${lesson.summary}
+              ${lesson.summary || ""}
             </p>
 
 
@@ -1575,7 +1722,7 @@ function renderLessons() {
               >
 
                 ${
-                  lesson.difficulty
+                  (lesson.difficulty || "BEGINNER")
                     .toUpperCase()
                 }
 
@@ -1612,153 +1759,382 @@ function renderLessons() {
 
 // =========================================================
 // OPEN LESSON
+// Supports unlimited code blocks through lesson.codes[]
+// Old lessons using lesson.code still work
 // =========================================================
 
 function openLesson(id) {
 
   const lesson =
     lessons.find(
-      item =>
-        item.id === id
+      item => item.id === id
     );
-
 
   if (!lesson) {
     return;
   }
-
 
   const modal =
     document.getElementById(
       "lessonModal"
     );
 
-
   if (!modal) {
     return;
   }
-
 
   const meta =
     document.getElementById(
       "lessonModalMeta"
     );
 
-
   const title =
     document.getElementById(
       "lessonModalTitle"
     );
-
 
   const summary =
     document.getElementById(
       "lessonModalSummary"
     );
 
-
   const content =
     document.getElementById(
       "lessonModalContent"
     );
 
-
-  const code =
+  const codeList =
     document.getElementById(
-      "lessonModalCode"
+      "lessonCodeList"
     );
 
 
-  const codeBlock =
-    document.getElementById(
-      "lessonCodeBlock"
-    );
-
+  // =====================================================
+  // META
+  // =====================================================
 
   if (meta) {
 
     meta.innerHTML = `
-
-      <span
-        class="pill"
-      >
-        ${lesson.category}
+      <span class="pill">
+        ${lesson.category || "Lesson"}
       </span>
 
+      ${
+        lesson.difficulty
+          ? `<span class="pill">${lesson.difficulty}</span>`
+          : ""
+      }
 
-      <span
-        class="pill"
-      >
-        ${lesson.difficulty}
-      </span>
-
-
-      <span
-        class="pill"
-      >
-        ${lesson.minutes} MIN
-      </span>
-
+      ${
+        lesson.minutes
+          ? `<span class="pill">${lesson.minutes} MIN</span>`
+          : ""
+      }
     `;
 
   }
 
 
+  // =====================================================
+  // LESSON CONTENT
+  // =====================================================
+
   if (title) {
-
     title.textContent =
-      lesson.title;
-
+      lesson.title || "Lesson";
   }
-
 
   if (summary) {
-
     summary.textContent =
-      lesson.summary;
-
+      lesson.summary || "";
   }
-
 
   if (content) {
-
     content.textContent =
-      lesson.content;
-
+      lesson.content || "";
   }
 
 
-  if (code) {
+  // =====================================================
+  // UNLIMITED CODE BLOCKS
+  // =====================================================
 
-    code.textContent =
-      lesson.code;
+  if (codeList) {
 
-  }
+    codeList.innerHTML = "";
+
+    let examples = [];
+
+    // New unlimited system.
+    if (Array.isArray(lesson.codes)) {
+      examples =
+        lesson.codes;
+    }
+
+    // Backwards compatibility for existing lessons.
+    else if (lesson.code) {
+      examples = [
+        {
+          title: "Example Code",
+          language: "lua",
+          code: lesson.code
+        }
+      ];
+    }
+
+    examples.forEach(
+      (example, index) => {
+
+        const wrapper =
+          document.createElement(
+            "div"
+          );
+
+        wrapper.className =
+          "code-block";
 
 
-  if (codeBlock) {
+        // Header
+        const head =
+          document.createElement(
+            "div"
+          );
 
-    codeBlock.classList.toggle(
-      "hidden",
-      !lesson.code
+        head.className =
+          "code-head";
+
+
+        const info =
+          document.createElement(
+            "div"
+          );
+
+
+        const heading =
+          document.createElement(
+            "strong"
+          );
+
+        heading.textContent =
+          example.title ||
+          `Code Example ${index + 1}`;
+
+        info.appendChild(
+          heading
+        );
+
+
+        // Language badge
+        if (example.language) {
+
+          const language =
+            document.createElement(
+              "span"
+            );
+
+          language.className =
+            "code-language";
+
+          language.textContent =
+            example.language;
+
+          info.appendChild(
+            language
+          );
+
+        }
+
+
+        // Copy button
+        const copyButton =
+          document.createElement(
+            "button"
+          );
+
+        copyButton.className =
+          "small-button copy-code-button";
+
+        copyButton.type =
+          "button";
+
+        copyButton.textContent =
+          "Copy Code";
+
+        copyButton.addEventListener(
+          "click",
+          () => {
+
+            copyLessonCode(
+              example.code || "",
+              copyButton
+            );
+
+          }
+        );
+
+
+        head.appendChild(
+          info
+        );
+
+        head.appendChild(
+          copyButton
+        );
+
+
+        // Code body
+        const pre =
+          document.createElement(
+            "pre"
+          );
+
+        const code =
+          document.createElement(
+            "code"
+          );
+
+        code.textContent =
+          example.code || "";
+
+        pre.appendChild(
+          code
+        );
+
+
+        wrapper.appendChild(
+          head
+        );
+
+        wrapper.appendChild(
+          pre
+        );
+
+        codeList.appendChild(
+          wrapper
+        );
+
+      }
     );
 
   }
 
 
+  // =====================================================
+  // SHOW MODAL
+  // =====================================================
+
   modal.classList.remove(
     "hidden"
   );
-
 
   document.body.style.overflow =
     "hidden";
 
 }
 
-
 window.openLesson =
   openLesson;
+
+
+// =========================================================
+// COPY ANY LESSON CODE BLOCK
+// =========================================================
+
+async function copyLessonCode(
+  code,
+  button
+) {
+
+  if (!code) {
+    return;
+  }
+
+  const originalText =
+    button?.textContent ||
+    "Copy Code";
+
+  try {
+
+    await navigator
+      .clipboard
+      .writeText(
+        code
+      );
+
+    if (button) {
+      button.textContent =
+        "Copied! ✓";
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Clipboard API failed:",
+      error
+    );
+
+    // Fallback for browsers where navigator.clipboard is blocked.
+    const textarea =
+      document.createElement(
+        "textarea"
+      );
+
+    textarea.value =
+      code;
+
+    textarea.style.position =
+      "fixed";
+
+    textarea.style.opacity =
+      "0";
+
+    document.body.appendChild(
+      textarea
+    );
+
+    textarea.select();
+
+    try {
+
+      document.execCommand(
+        "copy"
+      );
+
+      if (button) {
+        button.textContent =
+          "Copied! ✓";
+      }
+
+    } catch {
+
+      if (button) {
+        button.textContent =
+          "Copy Failed";
+      }
+
+    }
+
+    textarea.remove();
+
+  }
+
+  setTimeout(
+    () => {
+
+      if (button) {
+        button.textContent =
+          originalText;
+      }
+
+    },
+    1500
+  );
+
+}
+
+window.copyLessonCode =
+  copyLessonCode;
 
 
 // =========================================================
@@ -1770,7 +2146,6 @@ lessonSearch
     "input",
     renderLessons
   );
-
 
 lessonCategoryFilter
   ?.addEventListener(
@@ -1798,7 +2173,6 @@ document
     }
   );
 
-
 document
   .getElementById(
     "lessonModal"
@@ -1807,82 +2181,10 @@ document
     "click",
     function(event) {
 
-      if (
-        event.target === this
-      ) {
+      if (event.target === this) {
 
         closeModal(
           "lessonModal"
-        );
-
-      }
-
-    }
-  );
-
-
-// =========================================================
-// COPY LESSON CODE
-// =========================================================
-
-document
-  .getElementById(
-    "copyLessonCode"
-  )
-  ?.addEventListener(
-    "click",
-    async () => {
-
-      const code =
-        document.getElementById(
-          "lessonModalCode"
-        )
-        ?.textContent ||
-        "";
-
-
-      try {
-
-        await navigator
-          .clipboard
-          .writeText(
-            code
-          );
-
-
-        const button =
-          document.getElementById(
-            "copyLessonCode"
-          );
-
-
-        if (!button) {
-          return;
-        }
-
-
-        const oldText =
-          button.textContent;
-
-
-        button.textContent =
-          "Copied!";
-
-
-        setTimeout(
-          () => {
-
-            button.textContent =
-              oldText;
-
-          },
-          1200
-        );
-
-      } catch {
-
-        alert(
-          "Copy failed. Select the code manually."
         );
 
       }
