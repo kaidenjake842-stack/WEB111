@@ -168,15 +168,16 @@ const updates = [
 
   {
     version: "v1.2.3",
-    tag: "FIX",
+    tag: ["NEW", "FIX"],
     pinned: false,
 
-    title: "Bug Fixes!",
+    title: "Bug Fixes! + Updated learning center leassons so we can add more codes to it",
 
-    description: "The Development team has found an bug and fixed it.",
+    description: "The Development team has found an bug and fixed it. We have updated the leassons cards.",
 
     changes: [
-      "Bug Fixes"
+      "Bug Fixes",
+      "Leassons has been updated"
     ]
   }
 ];
