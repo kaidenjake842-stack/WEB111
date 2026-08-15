@@ -91,6 +91,17 @@ const assets = [
     category: "Scripts",
     description: "A non-saving free cash leaderstats file!",
     link: "https://drive.google.com/file/d/1yZHU7Rv19dkUzpwLBqGxPpAk4TNH-T1k/view"
+  },
+
+  {
+    id: 8,
+    name: "Rules GUI",
+    icon: "📜",
+    type: "FREE",
+    tag: "NEW",
+    category: "UI",
+    description: "A simple rules gui",
+    link: "https://drive.google.com/file/d/1OmEmcove3cRyiHXtoezwhu8kNgOvbNMY/view?usp=drive_open"
   }
 ];
 
@@ -168,16 +179,18 @@ const updates = [
 
   {
     version: "v1.2.3",
-    tag: ["NEW", "FIX"],
+    tag: ["NEW", "FIX", "REMOVED"],
     pinned: false,
 
-    title: "Bug Fixes! + Updated learning center leassons so we can add more codes to it",
+    title: "Bug Fixes! + Updated learning center leassons so we can add more codes to it + NEW ASSET + Removed 2 tabs",
 
-    description: "The Development team has found an bug and fixed it. We have updated the leassons cards.",
+    description: "The Development team has found an bug and fixed it. We have updated the leassons cards. + New Asset + Removed the free + premium tab and the premium tab",
 
     changes: [
       "Bug Fixes",
-      "Leassons has been updated"
+      "Leassons has been updated",
+      "NEW ASSET",
+      "Removed 2 tabs"
     ]
   }
 ];
