@@ -6,6 +6,7 @@
 
 
 
+
 // =========================================================
 // ASSETS
 // =========================================================
@@ -106,6 +107,756 @@ const assets = [
 ];
 
 
+
+
+// =========================================================
+// CREATOR SHOWCASE
+// =========================================================
+
+const creatorShowcase = [
+
+  {
+    id: 1,
+
+    name: "Jaiden",
+
+    avatar: "J",
+
+    category: "Scripting",
+
+    tag: "OWNER",
+
+    icon: "⚙️",
+
+    title:
+      "Founder & Lead Developer",
+
+    description:
+      "Develops Asset Hub systems, website features, Roblox scripts, and major platform updates.",
+
+    project:
+      "Asset Hub",
+
+    link: ""
+  },
+
+
+  {
+    id: 2,
+
+    name:
+      "Asset Hub Design",
+
+    avatar:
+      "A",
+
+    category:
+      "UI Design",
+
+    tag:
+      "FEATURED",
+
+    icon:
+      "🎨",
+
+    title:
+      "UI & Visual Designer",
+
+    description:
+      "Creates modern interfaces, loading screens, cards, gradients, themes, and visual resources.",
+
+    project:
+      "Modern UI Collection",
+
+    link:
+      ""
+  },
+
+
+  {
+    id: 3,
+
+    name:
+      "Community Studio",
+
+    avatar:
+      "C",
+
+    category:
+      "Building",
+
+    tag:
+      "VERIFIED",
+
+    icon:
+      "🏗️",
+
+    title:
+      "Builder & Model Creator",
+
+    description:
+      "Creates maps, models, props, environment builds, and other Roblox development resources.",
+
+    project:
+      "Community Map Pack",
+
+    link:
+      ""
+  },
+
+
+  {
+    id: 4,
+
+    name:
+      "FX Creator",
+
+    avatar:
+      "F",
+
+    category:
+      "Effects",
+
+    tag:
+      "CREATOR",
+
+    icon:
+      "✨",
+
+    title:
+      "Visual Effects Creator",
+
+    description:
+      "Creates particles, trails, auras, lighting effects, and visual polish for Roblox experiences.",
+
+    project:
+      "Aura Effects Pack",
+
+    link:
+      ""
+  },
+
+
+  {
+    id: 5,
+
+    name:
+      "Asset Hub Staff",
+
+    avatar:
+      "S",
+
+    category:
+      "Management",
+
+    tag:
+      "STAFF",
+
+    icon:
+      "🛡️",
+
+    title:
+      "Management Team",
+
+    description:
+      "Helps manage Asset Hub, review content, support users, and keep the community organized.",
+
+    project:
+      "Asset Hub Community",
+
+    link:
+      ""
+  }
+
+];
+
+
+// =========================================================
+// ELEMENTS
+// =========================================================
+
+const creatorSearch =
+  document.getElementById(
+    "creatorSearch"
+  );
+
+const creatorCategoryFilter =
+  document.getElementById(
+    "creatorCategoryFilter"
+  );
+
+
+// =========================================================
+// RENDER CREATOR SHOWCASE
+// =========================================================
+
+function renderCreatorShowcase() {
+
+  const grid =
+    document.getElementById(
+      "creatorShowcaseGrid"
+    );
+
+
+  if (!grid) {
+    return;
+  }
+
+
+  const query =
+    (
+      creatorSearch?.value ||
+      ""
+    )
+      .trim()
+      .toLowerCase();
+
+
+  const category =
+    creatorCategoryFilter?.value ||
+    "all";
+
+
+  const filtered =
+    creatorShowcase.filter(
+      creator => {
+
+        const searchText = `
+          ${creator.name}
+          ${creator.category}
+          ${creator.tag}
+          ${creator.title}
+          ${creator.description}
+          ${creator.project}
+        `.toLowerCase();
+
+
+        return (
+
+          searchText.includes(
+            query
+          )
+
+          &&
+
+          (
+            category === "all" ||
+            creator.category === category
+          )
+
+        );
+
+      }
+    );
+
+
+  if (
+    filtered.length === 0
+  ) {
+
+    grid.innerHTML = `
+
+      <article
+        class="showcase-card"
+        style="
+          grid-column:1/-1;
+        "
+      >
+
+        <div
+          class="showcase-body"
+          style="
+            text-align:center;
+            padding:40px;
+          "
+        >
+
+          <h3>
+            No creators found
+          </h3>
+
+          <p>
+            Try another search or category.
+          </p>
+
+        </div>
+
+      </article>
+
+    `;
+
+    return;
+  }
+
+
+  grid.innerHTML =
+    filtered
+      .map(
+        creator => `
+
+          <article
+            class="showcase-card"
+          >
+
+            <div
+              class="showcase-banner"
+            >
+              ${creator.icon}
+            </div>
+
+
+            <div
+              class="showcase-body"
+            >
+
+              <div
+                class="showcase-profile"
+              >
+
+                <div
+                  class="showcase-avatar"
+                >
+                  ${creator.avatar}
+                </div>
+
+
+                <div>
+
+                  <div
+                    class="badge-row"
+                  >
+
+                    <span
+                      class="
+                        pill
+                        ${creator.tag.toLowerCase()}
+                      "
+                    >
+                      ${creator.tag}
+                    </span>
+
+                  </div>
+
+
+                  <h3>
+                    ${creator.name}
+                  </h3>
+
+
+                  <small>
+                    ${creator.title}
+                  </small>
+
+                </div>
+
+              </div>
+
+
+              <p>
+                ${creator.description}
+              </p>
+
+
+              <div
+                class="showcase-project"
+              >
+
+                <span>
+                  FEATURED PROJECT
+                </span>
+
+                <strong>
+                  ${creator.project}
+                </strong>
+
+              </div>
+
+
+              <div
+                class="showcase-actions"
+              >
+
+                <span
+                  class="pill"
+                >
+                  ${creator.category}
+                </span>
+
+
+                ${
+                  creator.link
+
+                    ? `
+
+                      <a
+                        class="small-button"
+                        href="${creator.link}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        View Creator →
+                      </a>
+
+                    `
+
+                    : ""
+                }
+
+              </div>
+
+            </div>
+
+          </article>
+
+        `
+      )
+      .join("");
+
+}
+
+
+
+// =========================================================
+// REDEEM CODE SYSTEM
+// =========================================================
+
+const REDEEM_CODES_KEY =
+  "assetHubRedeemedCodes";
+
+
+// =========================================================
+// CODES
+// =========================================================
+
+const redeemCodes = {
+
+  LAUNCH2026: {
+    coins: 500,
+    message:
+      "You received 500 Asset Hub Coins!"
+  },
+
+  WELCOME: {
+    coins: 250,
+    message:
+      "Welcome to Asset Hub! You received 250 Coins."
+  },
+
+  THEMESTORE: {
+    coins: 300,
+    message:
+      "Theme Store bonus! +300 Coins."
+  },
+
+  CREATOR: {
+    coins: 150,
+    message:
+      "Creator Showcase reward! +150 Coins."
+  }
+
+};
+
+
+// =========================================================
+// LOAD REDEEMED CODES
+// =========================================================
+
+function loadRedeemedCodes() {
+
+  try {
+
+    const saved =
+      JSON.parse(
+        localStorage.getItem(
+          REDEEM_CODES_KEY
+        )
+      );
+
+
+    return Array.isArray(saved)
+      ? saved
+      : [];
+
+
+  } catch {
+
+    return [];
+
+  }
+
+}
+
+
+let redeemedCodes =
+  loadRedeemedCodes();
+
+
+// =========================================================
+// SAVE REDEEMED CODES
+// =========================================================
+
+function saveRedeemedCodes() {
+
+  localStorage.setItem(
+
+    REDEEM_CODES_KEY,
+
+    JSON.stringify(
+      redeemedCodes
+    )
+
+  );
+
+}
+
+
+// =========================================================
+// MESSAGE
+// =========================================================
+
+function showRedeemMessage(
+  message,
+  type = "normal"
+) {
+
+  const messageElement =
+    document.getElementById(
+      "redeemCodeMessage"
+    );
+
+
+  if (!messageElement) {
+    return;
+  }
+
+
+  messageElement.textContent =
+    message;
+
+
+  messageElement.classList.remove(
+    "success",
+    "error"
+  );
+
+
+  if (
+    type === "success"
+  ) {
+
+    messageElement.classList.add(
+      "success"
+    );
+
+  }
+
+
+  if (
+    type === "error"
+  ) {
+
+    messageElement.classList.add(
+      "error"
+    );
+
+  }
+
+}
+
+
+// =========================================================
+// REDEEM CODE
+// =========================================================
+
+function redeemAssetHubCode() {
+
+  const input =
+    document.getElementById(
+      "redeemCodeInput"
+    );
+
+
+  if (!input) {
+    return;
+  }
+
+
+  const code =
+    input.value
+      .trim()
+      .toUpperCase();
+
+
+  if (!code) {
+
+    showRedeemMessage(
+      "Enter a code first.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const reward =
+    redeemCodes[
+      code
+    ];
+
+
+  // INVALID CODE
+
+  if (!reward) {
+
+    showRedeemMessage(
+      "That code is invalid.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  // ALREADY REDEEMED
+
+  if (
+    redeemedCodes.includes(
+      code
+    )
+  ) {
+
+    showRedeemMessage(
+      "You already redeemed this code.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  // =====================================================
+  // GIVE COINS
+  // =====================================================
+
+  themeStoreData.coins +=
+    reward.coins;
+
+
+  // SAVE COINS
+
+  saveThemeStoreData();
+
+
+  // SAVE CODE AS USED
+
+  redeemedCodes.push(
+    code
+  );
+
+
+  saveRedeemedCodes();
+
+
+  // REFRESH STORE COINS
+
+  renderThemeStore();
+
+
+  // CLEAR INPUT
+
+  input.value =
+    "";
+
+
+  // SUCCESS
+
+  showRedeemMessage(
+    reward.message,
+    "success"
+  );
+
+}
+
+
+// =========================================================
+// BUTTON
+// =========================================================
+
+document
+  .getElementById(
+    "redeemCodeButton"
+  )
+  ?.addEventListener(
+    "click",
+    redeemAssetHubCode
+  );
+
+
+// =========================================================
+// ENTER KEY
+// =========================================================
+
+document
+  .getElementById(
+    "redeemCodeInput"
+  )
+  ?.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key === "Enter"
+      ) {
+
+        redeemAssetHubCode();
+
+      }
+
+    }
+  );
+
+// =========================================================
+// SEARCH
+// =========================================================
+
+creatorSearch
+  ?.addEventListener(
+    "input",
+    renderCreatorShowcase
+  );
+
+
+// =========================================================
+// CATEGORY FILTER
+// =========================================================
+
+creatorCategoryFilter
+  ?.addEventListener(
+    "change",
+    renderCreatorShowcase
+  );
+
+
+// =========================================================
+// INITIAL LOAD
+// =========================================================
+
+renderCreatorShowcase();
+
+// =========================================================
+// UPDATE TAG HELPER
+// =========================================================
+
+function formatUpdateTags(tag) {
+
+  if (Array.isArray(tag)) {
+    return tag.join(" • ");
+  }
+
+  return tag || "UPDATE";
+}
+
+
 // =========================================================
 // UPDATE LOG
 // =========================================================
@@ -192,8 +943,25 @@ const updates = [
       "NEW ASSET",
       "Removed 2 tabs"
     ]
+  },
+
+  {
+    version: "v1.2.4",
+    tag: "NEW",
+    pinned: false,
+
+    title: "New Theme Store! New Creaotr Showcase",
+
+    description: "We added a new theme store, and a creator show"
   }
 ];
+
+
+
+
+
+
+
 
 
 // =========================================================
@@ -451,6 +1219,793 @@ end)`
     code: ""
   }
 ];
+
+
+
+// =========================================================
+// THEME STORE
+// =========================================================
+
+const THEME_STORE_KEY =
+  "assetHubThemeStore";
+
+
+// =========================================================
+// THEMES
+// =========================================================
+
+const storeThemes = [
+
+  {
+    id:
+      "default-blue",
+
+    name:
+      "Cyber Blue",
+
+    rarity:
+      "FREE",
+
+    price:
+      0,
+
+    description:
+      "The classic Asset Hub cyan and blue theme.",
+
+    theme:
+      "dark",
+
+    accent:
+      "#53d6ff",
+
+    previewA:
+      "#071018",
+
+    previewB:
+      "#53d6ff"
+  },
+
+
+  {
+    id:
+      "purple-nebula",
+
+    name:
+      "Purple Nebula",
+
+    rarity:
+      "RARE",
+
+    price:
+      250,
+
+    description:
+      "A deep purple theme with a bright violet accent.",
+
+    theme:
+      "midnight",
+
+    accent:
+      "#9d6cff",
+
+    previewA:
+      "#080511",
+
+    previewB:
+      "#9d6cff"
+  },
+
+
+  {
+    id:
+      "emerald",
+
+    name:
+      "Emerald",
+
+    rarity:
+      "RARE",
+
+    price:
+      350,
+
+    description:
+      "Dark emerald styling with a clean green glow.",
+
+    theme:
+      "dark",
+
+    accent:
+      "#63e6be",
+
+    previewA:
+      "#06130f",
+
+    previewB:
+      "#63e6be"
+  },
+
+
+  {
+    id:
+      "inferno",
+
+    name:
+      "Inferno",
+
+    rarity:
+      "LEGENDARY",
+
+    price:
+      700,
+
+    description:
+      "A fiery red-orange theme for a stronger look.",
+
+    theme:
+      "midnight",
+
+    accent:
+      "#ff6b57",
+
+    previewA:
+      "#160705",
+
+    previewB:
+      "#ff6b57"
+  },
+
+
+  {
+    id:
+      "golden",
+
+    name:
+      "Golden",
+
+    rarity:
+      "EPIC",
+
+    price:
+      550,
+
+    description:
+      "Premium gold accents on a dark interface.",
+
+    theme:
+      "dark",
+
+    accent:
+      "#ffd36a",
+
+    previewA:
+      "#141005",
+
+    previewB:
+      "#ffd36a"
+  },
+
+
+  {
+    id:
+      "sakura",
+
+    name:
+      "Sakura",
+
+    rarity:
+      "EPIC",
+
+    price:
+      500,
+
+    description:
+      "Soft pink accents with a stylish modern look.",
+
+    theme:
+      "dark",
+
+    accent:
+      "#ff85c2",
+
+    previewA:
+      "#170912",
+
+    previewB:
+      "#ff85c2"
+  }
+
+];
+
+
+// =========================================================
+// LOAD THEME STORE
+// =========================================================
+
+function loadThemeStoreData() {
+
+  try {
+
+    const saved =
+      JSON.parse(
+        localStorage.getItem(
+          THEME_STORE_KEY
+        )
+      );
+
+
+    return {
+
+      coins:
+        Number(
+          saved?.coins
+        ) || 0,
+
+
+      owned:
+        Array.isArray(
+          saved?.owned
+        )
+
+          ? saved.owned
+
+          : [
+              "default-blue"
+            ],
+
+
+      equipped:
+        saved?.equipped ||
+        "default-blue",
+
+      claimedStarterCoins:
+        saved?.claimedStarterCoins === true
+
+    };
+
+
+  } catch {
+
+    return {
+
+      coins:
+        0,
+
+      owned: [
+        "default-blue"
+      ],
+
+      equipped:
+        "default-blue",
+
+      claimedStarterCoins:
+        false
+
+    };
+
+  }
+
+}
+
+
+let themeStoreData =
+  loadThemeStoreData();
+
+
+// =========================================================
+// SAVE STORE
+// =========================================================
+
+function saveThemeStoreData() {
+
+  localStorage.setItem(
+
+    THEME_STORE_KEY,
+
+    JSON.stringify(
+      themeStoreData
+    )
+
+  );
+
+}
+
+
+// =========================================================
+// EQUIP THEME
+// =========================================================
+
+function equipStoreTheme(
+  themeId
+) {
+
+  const theme =
+    storeThemes.find(
+      item =>
+        item.id ===
+        themeId
+    );
+
+
+  if (!theme) {
+    return;
+  }
+
+
+  if (
+    !themeStoreData
+      .owned
+      .includes(
+        themeId
+      )
+  ) {
+
+    return;
+
+  }
+
+
+  themeStoreData.equipped =
+    themeId;
+
+
+  saveThemeStoreData();
+
+
+  // Use your existing
+  // Asset Hub theme system
+
+  themeSettings.theme =
+    theme.theme;
+
+
+  themeSettings.accent =
+    theme.accent;
+
+
+  applyTheme();
+
+  saveTheme();
+
+
+  renderThemeStore();
+
+}
+
+
+window.equipStoreTheme =
+  equipStoreTheme;
+
+
+// =========================================================
+// PURCHASE THEME
+// =========================================================
+
+function buyStoreTheme(
+  themeId
+) {
+
+  const theme =
+    storeThemes.find(
+      item =>
+        item.id ===
+        themeId
+    );
+
+
+  if (!theme) {
+    return;
+  }
+
+
+  // Already owned
+
+  if (
+    themeStoreData
+      .owned
+      .includes(
+        themeId
+      )
+  ) {
+
+    equipStoreTheme(
+      themeId
+    );
+
+    return;
+
+  }
+
+
+  // Not enough coins
+
+  if (
+    themeStoreData.coins <
+    theme.price
+  ) {
+
+    alert(
+      "You do not have enough Asset Hub Coins for this theme."
+    );
+
+    return;
+
+  }
+
+
+  // Remove coins
+
+  themeStoreData.coins -=
+    theme.price;
+
+
+  // Add ownership
+
+  themeStoreData
+    .owned
+    .push(
+      themeId
+    );
+
+
+  themeStoreData.equipped =
+    themeId;
+
+
+  saveThemeStoreData();
+
+
+  equipStoreTheme(
+    themeId
+  );
+
+}
+
+
+window.buyStoreTheme =
+  buyStoreTheme;
+
+
+// =========================================================
+// RENDER THEME STORE
+// =========================================================
+
+function renderThemeStore() {
+
+  const grid =
+    document.getElementById(
+      "themeStoreGrid"
+    );
+
+
+  const balance =
+    document.getElementById(
+      "themeCoinBalance"
+    );
+
+
+  // COINS
+
+  if (balance) {
+
+    balance.textContent =
+      themeStoreData
+        .coins
+        .toLocaleString();
+
+  }
+
+
+  if (!grid) {
+    return;
+  }
+
+
+  grid.innerHTML =
+    storeThemes
+      .map(
+        theme => {
+
+
+          const owned =
+            themeStoreData
+              .owned
+              .includes(
+                theme.id
+              );
+
+
+          const equipped =
+            themeStoreData
+              .equipped ===
+            theme.id;
+
+
+          let buttonText =
+            `Unlock • ${theme.price} Coins`;
+
+
+          if (
+            theme.price ===
+            0
+          ) {
+
+            buttonText =
+              "Unlock Free";
+
+          }
+
+
+          if (owned) {
+
+            buttonText =
+              equipped
+
+                ? "✓ Equipped"
+
+                : "Equip";
+
+          }
+
+
+          return `
+
+            <article
+              class="theme-store-card"
+            >
+
+
+              <!-- PREVIEW -->
+
+              <div
+                class="theme-preview"
+                style="
+                  background:
+                    ${theme.previewA};
+                "
+              >
+
+
+                <div
+                  class="theme-preview-left"
+                  style="
+                    background:
+                      ${theme.previewA};
+                  "
+                >
+
+                  <div
+                    class="theme-preview-dot"
+                    style="
+                      background:
+                        ${theme.previewB};
+                    "
+                  ></div>
+
+                </div>
+
+
+                <div
+                  class="theme-preview-right"
+                  style="
+                    background:
+                      ${theme.previewB};
+                  "
+                ></div>
+
+
+              </div>
+
+
+              <!-- META -->
+
+              <div
+                class="theme-store-meta"
+              >
+
+
+                <span
+                  class="pill"
+                >
+
+                  ${theme.rarity}
+
+                </span>
+
+
+                <span
+                  class="
+                    theme-price
+                    ${
+                      theme.price === 0
+                        ? "free"
+                        : ""
+                    }
+                  "
+                >
+
+                  ${
+                    theme.price === 0
+
+                      ? "FREE"
+
+                      : `🪙 ${theme.price}`
+                  }
+
+                </span>
+
+
+              </div>
+
+
+              <!-- NAME -->
+
+              <h3>
+
+                ${theme.name}
+
+              </h3>
+
+
+              <p>
+
+                ${theme.description}
+
+              </p>
+
+
+              <!-- ACTION -->
+
+              <div
+                class="theme-store-actions"
+              >
+
+
+                <span
+                  class="pill"
+                >
+
+                  ${
+                    owned
+                      ? "OWNED"
+                      : "LOCKED"
+                  }
+
+                </span>
+
+
+                <button
+                  class="
+                    theme-store-button
+
+                    ${
+                      equipped
+                        ? "equipped"
+                        : ""
+                    }
+                  "
+                  type="button"
+
+                  ${
+                    equipped
+                      ? "disabled"
+                      : ""
+                  }
+
+                  onclick="
+                    ${
+                      owned
+
+                        ? `equipStoreTheme('${theme.id}')`
+
+                        : `buyStoreTheme('${theme.id}')`
+                    }
+                  "
+                >
+
+                  ${buttonText}
+
+                </button>
+
+
+              </div>
+
+
+            </article>
+
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+// =========================================================
+// ONE-TIME STARTER COINS
+// =========================================================
+
+function updateStarterCoinButton() {
+
+  const button =
+    document.getElementById(
+      "claimThemeCoins"
+    );
+
+  if (!button) {
+    return;
+  }
+
+  if (
+    themeStoreData
+      .claimedStarterCoins
+  ) {
+
+    button.textContent =
+      "✓ Starter Coins Claimed";
+
+    button.disabled =
+      true;
+
+  } else {
+
+    button.textContent =
+      "+ Claim 500 Starter Coins";
+
+    button.disabled =
+      false;
+
+  }
+
+}
+
+
+document
+  .getElementById(
+    "claimThemeCoins"
+  )
+  ?.addEventListener(
+    "click",
+    () => {
+
+      if (
+        themeStoreData
+          .claimedStarterCoins
+      ) {
+
+        alert(
+          "You already claimed your 500 starter coins!"
+        );
+
+        return;
+      }
+
+
+      themeStoreData.coins +=
+        500;
+
+
+      themeStoreData
+        .claimedStarterCoins =
+        true;
+
+
+      saveThemeStoreData();
+
+
+      renderThemeStore();
+
+      updateStarterCoinButton();
+
+
+      alert(
+        "You received 500 Asset Hub Coins!"
+      );
+
+    }
+  );
+
 
 
 // =========================================================
@@ -1552,7 +3107,7 @@ function renderUpdates() {
 
                   •
 
-                  ${update.tag}
+                  ${formatUpdateTags(update.tag)}
 
                   ${
                     update.pinned
@@ -1573,7 +3128,7 @@ function renderUpdates() {
               <span
                 class="pill"
               >
-                ${update.tag}
+                ${formatUpdateTags(update.tag)}
               </span>
 
             </div>
@@ -1589,7 +3144,7 @@ function renderUpdates() {
             >
 
               ${
-                update.changes
+                (Array.isArray(update.changes) ? update.changes : [])
                   .map(
                     change => `
 
@@ -2387,6 +3942,8 @@ function makeSecondaryAccent(
 }
 
 
+
+
 // =========================================================
 // APPLY THEME
 // =========================================================
@@ -2843,7 +4400,52 @@ document.addEventListener(
 // START ASSET HUB
 // =========================================================
 
+// Apply the regular saved theme first.
 applyTheme();
+
+
+// =========================================================
+// RESTORE THEME STORE THEME
+// =========================================================
+
+if (
+  themeStoreData &&
+  themeStoreData.equipped &&
+  Array.isArray(themeStoreData.owned) &&
+  themeStoreData.owned.includes(
+    themeStoreData.equipped
+  )
+) {
+
+  const savedStoreTheme =
+    storeThemes.find(
+      theme =>
+        theme.id ===
+        themeStoreData.equipped
+    );
+
+  if (savedStoreTheme) {
+
+    themeSettings.theme =
+      savedStoreTheme.theme;
+
+    themeSettings.accent =
+      savedStoreTheme.accent;
+
+    applyTheme();
+
+    saveTheme();
+
+  }
+
+}
+
+
+
+
+// =========================================================
+// RENDER WEBSITE
+// =========================================================
 
 renderAssets();
 
@@ -2853,8 +4455,16 @@ renderUpdates();
 
 renderLessons();
 
+renderThemeStore();
 
-// Countdown updates every second
+updateStarterCoinButton();
+
+renderCreatorShowcase();
+
+
+// =========================================================
+// COUNTDOWN LOOP
+// =========================================================
 
 setInterval(
   renderCountdowns,
