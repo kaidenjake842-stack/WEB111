@@ -103,6 +103,14 @@ const assets = [
     category: "UI",
     description: "A simple rules gui",
     link: "https://drive.google.com/file/d/1OmEmcove3cRyiHXtoezwhu8kNgOvbNMY/view?usp=drive_open"
+  },
+  {
+    name: "TopbarPlus",
+    type: "FREE",
+    tag: "NEW",
+    category: "Resources",
+    description: "This is a resource for your game!",
+    link: "https://create.roblox.com/store/asset/92368439343389/TopbarPlus?keyword=Topbar&pageNumber=0&pagePosition=2"
   }
 ];
 
@@ -552,6 +560,16 @@ const redeemCodes = {
     coins: 150,
     message:
       "Creator Showcase reward! +150 Coins."
+  },
+
+  NEWASSET: {
+    coins: 250,
+    message: "New asset has been added"
+  },
+
+  NEWCATEGORY: {
+    coins: 5,
+    message: "New Resources Category has been added"
   }
 
 };
@@ -950,9 +968,16 @@ const updates = [
     tag: "NEW",
     pinned: false,
 
-    title: "New Theme Store! New Creaotr Showcase",
+    title: "New Theme Store! New Creaotr Showcase + New Asset & Resource category + 2 new codes + New Leasson",
 
-    description: "We added a new theme store, and a creator show"
+    description: "We added a new theme store, and a creator show, New Asset and resource category and 2 new codes, New Leasson",
+
+    changes: [
+      "New Asset",
+      "New Resource Category",
+      "2 New Codes: NEWASSET, NEWCATEGORY",
+      "New Leasson"
+    ]
   }
 ];
 
@@ -1216,7 +1241,94 @@ end)`
     content:
       "Use consistent spacing, readable text, clear hierarchy, and UIListLayout or UIGridLayout for repeated content.",
 
-    code: ""
+  },
+
+  {
+    id: "ui-corner",
+
+    title: "UI Design Part 2| UICorner",
+
+    category: "UI Design",
+
+    difficulty: "Beginner",
+
+    minutes: 5,
+
+    summary: "Learn how to use UICorner to create smooth, rounded Roblox UI",
+
+    content: `
+    UICorner is a Roblox UI object that makes the corners of GUI objects rounded.
+
+    You can use UICorner inside objects such as:
+
+    - Frames
+    - TextButtons
+    - ImageButtons
+    - TextLabels
+    - ImageLabels
+
+    UICorner uses the CornerRadius property to control how rounded the object becomes.
+    
+
+    For example:
+
+    UDim.new(0, 10)
+
+    means the corners have a radius of 10 pixels.
+
+    You can also use scale instead:
+
+    UDim.new(0.5, 0)
+
+    A scale of 0.5 can create a completely rounded appearance depending on the size of the UI.
+
+    UICorner is useful for creating:
+
+    - Modern Buttons
+    - Rounded cards
+    - Profile pictures
+    - Shop interfaces
+    - Notification boxes
+    - Menus
+    - Clean modern UI
+
+    TIP:
+
+    Try to keep your corner radius consistent across your interface.
+
+    For example, if most cards uses a CornerRadius of 12 pixels, your other cards should usually use something similar.
+    `.trim(),
+
+    codes: [
+      {
+        title: "Creating a UICorner",
+        language: "lua",
+
+        code: `local frame = script.Parent
+        
+        local corner = Instance.new("UICorner")
+
+        corner.CornerRadius = UDim.new(0, 12)
+
+        corner.Parent = frame
+        `
+      },
+      {
+        title: "Rounded Buttons",
+        language: "lua",
+
+        code: ` 
+        local button = script.Parent
+
+        local corner = Instance.new("UICorner")
+
+        corner.CornerRadius = UDim.new(0, 10)
+
+        corner.Parent = button
+        
+        `
+      }
+    ]
   }
 ];
 
