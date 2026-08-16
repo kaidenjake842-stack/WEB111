@@ -27,7 +27,9 @@
       <a href="#updates">Updates</a>
       <a href="#learn">Learn</a>
       <a href="#creators">Creators</a>
-    </nav>
+      <a href="#theme-store">Theme Store</a>
+      <a href="#creator-showcase">Showcase</a>
+      </nav>
 
     <div class="nav-actions">
       <button class="theme-button" id="openThemePanel" type="button" aria-label="Open theme settings">🎨</button>
@@ -269,6 +271,196 @@
     </div>
   </section>
 
+  <section id="theme-store">
+  <div class="shell">
+
+    <div class="section-head">
+
+      <div>
+        <div class="eyebrow">
+          Customize Asset Hub
+        </div>
+
+        <h2>
+          Theme Store
+        </h2>
+
+        <p>
+          Unlock and equip custom Asset Hub themes.
+        </p>
+      </div>
+
+
+      <div class="theme-wallet">
+
+        <span>
+          🪙
+        </span>
+
+        <strong id="themeCoinBalance">
+          0
+        </strong>
+
+        <small>
+          COINS
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="theme-store-toolbar">
+
+      <div class="theme-store-info">
+
+        <span class="pill new">
+          LOCAL SAVE
+        </span>
+
+        <p>
+          Themes and coins save automatically on this browser.
+        </p>
+
+      </div>
+
+
+      <!-- TEST BUTTON -->
+
+      <button
+        class="small-button"
+        id="claimThemeCoins"
+        type="button"
+      >
+        + Claim 500 Test Coins
+      </button>
+
+    </div>
+
+
+    <div
+      class="theme-store-grid"
+      id="themeStoreGrid"
+    ></div>
+
+  </div>
+</section>
+
+<section id="creator-showcase">
+  <div class="shell">
+
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">
+          Community Spotlight
+        </div>
+
+        <h2>
+          Creator Showcase
+        </h2>
+
+        <p>
+          Discover featured creators and the projects they’ve built.
+        </p>
+      </div>
+    </div>
+
+    <div class="showcase-toolbar">
+
+      <input
+        class="control"
+        id="creatorSearch"
+        type="search"
+        placeholder="Search creators or projects..."
+      >
+
+      <select
+        class="control"
+        id="creatorCategoryFilter"
+      >
+        <option value="all">
+          All Creators
+        </option>
+
+        <option value="Scripting">
+          Scripting
+        </option>
+
+        <option value="UI Design">
+          UI Design
+        </option>
+
+        <option value="Building">
+          Building
+        </option>
+
+        <option value="Effects">
+          Effects
+        </option>
+
+        <option value="Management">
+          Management
+        </option>
+      </select>
+
+    </div>
+
+    <div
+      class="creator-showcase-grid"
+      id="creatorShowcaseGrid"
+    ></div>
+
+  </div>
+</section>
+
+<section id="redeem-codes">
+  <div class="shell">
+
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">
+          Rewards
+        </div>
+
+        <h2>
+          Redeem Codes
+        </h2>
+
+        <p>
+          Enter Asset Hub codes to earn coins and rewards.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="redeem-card">
+
+      <input
+        class="control"
+        id="redeemCodeInput"
+        type="text"
+        placeholder="Enter code..."
+        autocomplete="off"
+      >
+
+      <button
+        class="button primary"
+        id="redeemCodeButton"
+        type="button"
+      >
+        Redeem Code
+      </button>
+
+
+      <p
+        class="redeem-message"
+        id="redeemCodeMessage"
+      ></p>
+
+    </div>
+
+  </div>
+</section>
 </main>
 
 <footer>
