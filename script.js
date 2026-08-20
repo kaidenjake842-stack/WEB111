@@ -7,6 +7,7 @@
 
 
 
+
 // =========================================================
 // ASSETS
 // =========================================================
@@ -105,12 +106,31 @@ const assets = [
     link: "https://drive.google.com/file/d/1OmEmcove3cRyiHXtoezwhu8kNgOvbNMY/view?usp=drive_open"
   },
   {
+    id: 9,
     name: "TopbarPlus",
     type: "FREE",
     tag: "NEW",
     category: "Resources",
     description: "This is a resource for your game!",
     link: "https://create.roblox.com/store/asset/92368439343389/TopbarPlus?keyword=Topbar&pageNumber=0&pagePosition=2"
+  },
+  {
+    id: 10,
+    name: "HD Admin",
+    type: "FREE",
+    tag: "NEW",
+    category: "Resources",
+    description: "Admin commands for your game! Made by ForeverHD",
+    link: "https://create.roblox.com/store/asset/857927023/HD-Admin?pagePosition=2"
+  },
+  {
+    id: 11,
+    name: "Code Gui",
+    type: "PAID",
+    tag: "NEW",
+    category: "UI",
+    description: "A redeem system for your game so players can redeem codes for cash, gems, etc",
+    link: "https://progod.gumroad.com/l/mcjcsu"
   }
 ];
 
@@ -142,10 +162,21 @@ const creatorShowcase = [
     description:
       "Develops Asset Hub systems, website features, Roblox scripts, and major platform updates.",
 
+    about:
+      "Jaiden is a Roblox developer focused on scripting, UI systems, game systems, and web development. He founded Asset Hub to give Roblox creators useful resources, lessons, and ready-to-use assets.",
+
+    specialties: ["Roblox Scripting", "UI Systems", "Web Development", "Game Systems"],
+
     project:
       "Asset Hub",
 
-    link: ""
+    links: {},
+
+    images: [
+      "images/jaiden-work-1.png",
+      "images/jaiden-work-2.png",
+      "images/jaiden-work-3.png"
+    ]
   },
 
 
@@ -173,11 +204,21 @@ const creatorShowcase = [
     description:
       "Creates modern interfaces, loading screens, cards, gradients, themes, and visual resources.",
 
+    about:
+      "Asset Hub Design creates clean, responsive Roblox interfaces and visual resources with a focus on readable layouts, modern effects, and consistent styling.",
+
+    specialties: ["Roblox UI", "Loading Screens", "Website Design", "Theme Design"],
+
     project:
       "Modern UI Collection",
 
-    link:
-      ""
+    links: {},
+
+    images: [
+      "images/design-work-1.png",
+      "images/design-work-2.png",
+      "images/design-work-3.png"
+    ]
   },
 
 
@@ -205,11 +246,17 @@ const creatorShowcase = [
     description:
       "Creates maps, models, props, environment builds, and other Roblox development resources.",
 
+    about:
+      "Community Studio builds environments and reusable models for Roblox experiences, from detailed maps to polished props.",
+
+    specialties: ["Map Building", "3D Models", "Environment Design"],
+
     project:
       "Community Map Pack",
 
-    link:
-      ""
+    links: {},
+
+    images: []
   },
 
 
@@ -237,11 +284,17 @@ const creatorShowcase = [
     description:
       "Creates particles, trails, auras, lighting effects, and visual polish for Roblox experiences.",
 
+    about:
+      "FX Creator specializes in effects that make Roblox experiences feel more alive, including particles, auras, trails, and lighting.",
+
+    specialties: ["Particle Effects", "Trails", "Auras", "Lighting"],
+
     project:
       "Aura Effects Pack",
 
-    link:
-      ""
+    links: {},
+
+    images: []
   },
 
 
@@ -269,11 +322,17 @@ const creatorShowcase = [
     description:
       "Helps manage Asset Hub, review content, support users, and keep the community organized.",
 
+    about:
+      "The Asset Hub Staff team supports creators, reviews new content, handles reports, and helps keep the community welcoming and organized.",
+
+    specialties: ["Community Support", "Content Review", "Moderation"],
+
     project:
       "Asset Hub Community",
 
-    link:
-      ""
+    links: {},
+
+    images: []
   }
 
 ];
@@ -491,24 +550,13 @@ function renderCreatorShowcase() {
                 </span>
 
 
-                ${
-                  creator.link
-
-                    ? `
-
-                      <a
-                        class="small-button"
-                        href="${creator.link}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        View Creator →
-                      </a>
-
-                    `
-
-                    : ""
-                }
+                <button
+                  class="small-button"
+                  type="button"
+                  onclick="openCreatorShowcase(${creator.id})"
+                >
+                  View Showcase →
+                </button>
 
               </div>
 
@@ -521,6 +569,105 @@ function renderCreatorShowcase() {
       .join("");
 
 }
+
+
+// =========================================================
+// CREATOR PROFILE MODAL
+// =========================================================
+
+function openCreatorShowcase(id) {
+  const creator = creatorShowcase.find(item => item.id === id);
+  const modal = document.getElementById("creatorModal");
+
+  if (!creator || !modal) return;
+
+  document.getElementById("creatorModalAvatar").textContent = creator.avatar || "?";
+  document.getElementById("creatorModalName").textContent = creator.name;
+  document.getElementById("creatorModalTitle").textContent = creator.title || "";
+  document.getElementById("creatorModalAbout").textContent = creator.about || creator.description || "";
+
+  document.getElementById("creatorModalBadges").innerHTML = `
+    <span class="pill ${creator.tag.toLowerCase()}">${creator.tag}</span>
+    <span class="pill">${creator.category}</span>
+  `;
+
+  document.getElementById("creatorModalSpecialties").innerHTML =
+    (creator.specialties || [])
+      .map(specialty => `<span class="pill">${specialty}</span>`)
+      .join("");
+
+  document.getElementById("creatorModalProject").innerHTML = `
+    <span>FEATURED PROJECT</span>
+    <strong>${creator.project || "No project listed"}</strong>
+  `;
+
+  const gallery = document.getElementById("creatorModalGallery");
+
+  gallery.innerHTML = (creator.images || []).length
+    ? creator.images.map((image, index) => `
+        <button class="creator-gallery-item" type="button"
+          onclick="openCreatorImage('${image}', '${creator.name} project image ${index + 1}')">
+          <img src="${image}" alt="${creator.name} project image ${index + 1}" loading="lazy">
+        </button>
+      `).join("")
+    : `<p class="creator-gallery-empty">This creator has not added project images yet.</p>`;
+
+  const linkLabels = {
+    roblox: "Roblox",
+    github: "GitHub",
+    discord: "Discord",
+    website: "Website"
+  };
+
+  document.getElementById("creatorModalLinks").innerHTML =
+    Object.entries(creator.links || {})
+      .filter(([, url]) => url)
+      .map(([type, url]) => `
+        <a class="small-button" href="${url}" target="_blank" rel="noopener noreferrer">
+          ${linkLabels[type] || type}
+        </a>
+      `).join("");
+
+  modal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+}
+
+function closeCreatorModal() {
+  document.getElementById("creatorModal")?.classList.add("hidden");
+  document.body.style.overflow = "";
+}
+
+function openCreatorImage(source, altText) {
+  const viewer = document.getElementById("creatorImageViewer");
+  const image = document.getElementById("creatorImageViewerImage");
+  if (!viewer || !image) return;
+
+  image.src = source;
+  image.alt = altText;
+  viewer.classList.remove("hidden");
+}
+
+function closeCreatorImage() {
+  document.getElementById("creatorImageViewer")?.classList.add("hidden");
+}
+
+window.openCreatorShowcase = openCreatorShowcase;
+window.openCreatorImage = openCreatorImage;
+
+document.getElementById("closeCreatorModal")?.addEventListener("click", closeCreatorModal);
+document.getElementById("creatorModal")?.addEventListener("click", event => {
+  if (event.target === event.currentTarget) closeCreatorModal();
+});
+document.getElementById("closeCreatorImageViewer")?.addEventListener("click", closeCreatorImage);
+document.getElementById("creatorImageViewer")?.addEventListener("click", event => {
+  if (event.target === event.currentTarget) closeCreatorImage();
+});
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    closeCreatorImage();
+    closeCreatorModal();
+  }
+});
 
 
 
@@ -1203,6 +1350,184 @@ end)`
     ]
   },
 
+
+  {
+  id: "remote-functions",
+
+  title: "Remote Functions Part 1 | Understanding RemoteFunctions",
+
+  category: "Roblox Scripting",
+
+  difficulty: "Intermediate",
+
+  minutes: 9,
+
+  summary:
+    "Learn how RemoteFunctions communicate between the client and server and return information.",
+
+  content: `
+RemoteFunctions allow the client and server to communicate while also returning a value.
+
+They are similar to RemoteEvents, but there is one major difference.
+
+RemoteEvent:
+Sends information without waiting for a response.
+
+RemoteFunction:
+Sends a request and waits for information to be returned.
+
+The client calls the server using:
+
+RemoteFunction:InvokeServer(...)
+
+The server receives the request using:
+
+RemoteFunction.OnServerInvoke
+
+The first argument received by OnServerInvoke is automatically the player.
+
+RemoteFunctions are useful for:
+
+- Player Information
+- Shop Information
+- Inventory Information
+- Owned Items
+- Server Settings
+- Current Stats
+- Purchase Results
+
+IMPORTANT:
+
+Never trust important values sent from the client.
+
+The server should verify prices, currency, ownership, permissions, and rewards.
+
+InvokeServer waits until the server returns a response, so only use RemoteFunctions when you actually need information returned.
+  `.trim(),
+
+  codes: [
+    {
+      title: "Create GetCoins RemoteFunction",
+      language: "lua",
+
+      code: `local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local GetCoins = Instance.new("RemoteFunction")
+
+GetCoins.Name = "GetCoins"
+
+GetCoins.Parent = ReplicatedStorage`
+    },
+
+    {
+      title: "Server Script",
+      language: "lua",
+
+      code: `local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local GetCoins = ReplicatedStorage:WaitForChild("GetCoins")
+
+GetCoins.OnServerInvoke = function(player)
+
+    local leaderstats = player:FindFirstChild("leaderstats")
+
+    if not leaderstats then
+        return 0
+    end
+
+    local coins = leaderstats:FindFirstChild("Coins")
+
+    if not coins then
+        return 0
+    end
+
+    return coins.Value
+end`
+    },
+
+    {
+      title: "Client Script",
+      language: "lua",
+
+      code: `local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local GetCoins = ReplicatedStorage:WaitForChild("GetCoins")
+
+local coins = GetCoins:InvokeServer()
+
+print("You have", coins, "Coins!")`
+    },
+
+    {
+      title: "Create GetItemInfo RemoteFunction",
+      language: "lua",
+
+      code: `local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local GetItemInfo = Instance.new("RemoteFunction")
+
+GetItemInfo.Name = "GetItemInfo"
+
+GetItemInfo.Parent = ReplicatedStorage`
+    },
+
+    {
+      title: "Sending an Argument",
+      language: "lua",
+
+      code: `local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local GetItemInfo = ReplicatedStorage:WaitForChild("GetItemInfo")
+
+local itemName = "BlueTrail"
+
+local information = GetItemInfo:InvokeServer(itemName)
+
+if information then
+    print(information.Name)
+    print(information.Price)
+    print(information.Rarity)
+end`
+    },
+
+    {
+      title: "Returning a Table",
+      language: "lua",
+
+      code: `local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local GetItemInfo = ReplicatedStorage:WaitForChild("GetItemInfo")
+
+local Items = {
+
+    BlueTrail = {
+        Name = "Blue Trail",
+        Price = 700,
+        Rarity = "Rare"
+    },
+
+    RedTrail = {
+        Name = "Red Trail",
+        Price = 1000,
+        Rarity = "Epic"
+    }
+
+}
+
+GetItemInfo.OnServerInvoke = function(player, itemName)
+
+    local item = Items[itemName]
+
+    if not item then
+        return nil
+    end
+
+    return item
+end`
+    }
+  ]
+},
+
   {
     id: "datastore",
 
@@ -1242,6 +1567,8 @@ end)`
       "Use consistent spacing, readable text, clear hierarchy, and UIListLayout or UIGridLayout for repeated content.",
 
   },
+
+  
 
   {
     id: "ui-corner",
@@ -1329,7 +1656,7 @@ end)`
         `
       }
     ]
-  }
+  },
 ];
 
 
@@ -1407,6 +1734,25 @@ const storeThemes = [
       "#9d6cff"
   },
 
+  {
+    id: "crimson-night",
+
+    name: "Crimson Night",
+
+    rarity: "EPIC",
+
+    price: 1000,
+
+    description: "A dark crimson theme with deep red accents and a dangerous nighttime look.",
+
+    theme: "midnight",
+
+    accent: "#DC143C",
+
+    previewA: "#080306",
+
+    previewB: "#DC143C"
+  },
 
   {
     id:
