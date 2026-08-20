@@ -1347,6 +1347,33 @@ pre{margin:0;padding:15px;background:#061018;color:#dcecff;overflow:auto;font-si
    REDEEM CODES
 ========================================================= */
 
+/* Creator portfolio modal */
+.creator-modal-card {max-height:88vh;overflow-y:auto}
+.creator-profile-header {display:flex;align-items:center;gap:16px;padding-right:42px;margin-bottom:24px}
+.large-avatar {width:72px;height:72px;border-radius:20px;font-size:23px}
+.creator-profile-header h2 {margin-top:8px}
+.creator-profile-header p,.creator-profile-section p {color:var(--muted);line-height:1.7}
+.creator-profile-section {margin-top:24px}
+.creator-profile-section h3 {margin-bottom:10px}
+.creator-gallery-help {margin-top:-4px;font-size:11px}
+.creator-gallery {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+.creator-gallery-item {display:block;padding:0;overflow:hidden;cursor:zoom-in;border:1px solid var(--line);border-radius:12px;background:var(--card-soft)}
+.creator-gallery-item img {display:block;width:100%;height:180px;object-fit:cover;transition:transform .2s ease}
+.creator-gallery-item:hover img {transform:scale(1.04)}
+.creator-gallery-empty {grid-column:1/-1;padding:28px;border:1px dashed var(--line);border-radius:12px;text-align:center;background:var(--card-soft)}
+.creator-profile-links {display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+.creator-image-viewer {position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:40px;background:rgba(0,0,0,.9)}
+.creator-image-viewer.hidden {display:none}
+.creator-image-viewer img {max-width:min(1200px,94vw);max-height:88vh;object-fit:contain;border:1px solid rgba(255,255,255,.16);border-radius:14px;box-shadow:0 30px 100px rgba(0,0,0,.55)}
+.creator-image-viewer .modal-close {position:fixed;top:22px;right:22px}
+
+@media(max-width:750px) {
+  .creator-profile-header {align-items:flex-start}
+  .creator-gallery {grid-template-columns:1fr}
+  .creator-gallery-item img {height:210px}
+  .creator-image-viewer {padding:18px}
+}
+
 .redeem-card {
   display: grid;
 
