@@ -126,6 +126,7 @@ const assets = [
   {
     id: 11,
     name: "Code Gui",
+    icon: "💵",
     type: "PAID",
     tag: "NEW",
     category: "UI",
