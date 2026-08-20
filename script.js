@@ -125,12 +125,12 @@ const assets = [
   },
   {
     id: 11,
-    name: "Code Gui",
-    icon: "💵",
+    name: "Code GUI",
+    icon: "🎟️",
     type: "PAID",
     tag: "NEW",
     category: "UI",
-    description: "A redeem system for your game so players can redeem codes for cash, gems, etc",
+    description: "A redeem system for your game!",
     link: "https://progod.gumroad.com/l/mcjcsu"
   }
 ];
@@ -2590,28 +2590,15 @@ function renderAssets() {
       `.toLowerCase();
 
 
+      const normalizedCategory = String(category).trim().toLowerCase();
+      const normalizedAssetCategory = String(asset.category || "").trim().toLowerCase();
+      const normalizedType = String(type).trim().toLowerCase();
+      const normalizedAssetType = String(asset.type || "").trim().toLowerCase();
+
       return (
-
-        searchText.includes(
-          query
-        )
-
-        &&
-
-        (
-          category === "all" ||
-          asset.category ===
-            category
-        )
-
-        &&
-
-        (
-          type === "all" ||
-          asset.type ===
-            type
-        )
-
+        searchText.includes(query) &&
+        (normalizedCategory === "all" || normalizedAssetCategory === normalizedCategory) &&
+        (normalizedType === "all" || normalizedAssetType === normalizedType)
       );
 
     });
