@@ -606,6 +606,49 @@
 </div>
 
 
+<div class="modal hidden" id="creatorModal">
+  <div class="modal-card large creator-modal-card">
+    <button class="modal-close" id="closeCreatorModal" type="button" aria-label="Close creator showcase">×</button>
+
+    <div class="creator-profile-header">
+      <div class="showcase-avatar large-avatar" id="creatorModalAvatar"></div>
+      <div>
+        <div class="badge-row" id="creatorModalBadges"></div>
+        <h2 id="creatorModalName">Creator</h2>
+        <p id="creatorModalTitle"></p>
+      </div>
+    </div>
+
+    <div class="creator-profile-section">
+      <h3>About</h3>
+      <p id="creatorModalAbout"></p>
+    </div>
+
+    <div class="creator-profile-section">
+      <h3>Specialties</h3>
+      <div class="badge-row" id="creatorModalSpecialties"></div>
+    </div>
+
+    <div class="creator-profile-section">
+      <h3>Featured Project</h3>
+      <div class="showcase-project" id="creatorModalProject"></div>
+    </div>
+
+    <div class="creator-profile-section">
+      <h3>Work Showcase</h3>
+      <p class="creator-gallery-help">Click an image to view it full size.</p>
+      <div class="creator-gallery" id="creatorModalGallery"></div>
+    </div>
+
+    <div class="creator-profile-links" id="creatorModalLinks"></div>
+  </div>
+</div>
+
+<div class="creator-image-viewer hidden" id="creatorImageViewer">
+  <button class="modal-close" id="closeCreatorImageViewer" type="button" aria-label="Close image viewer">×</button>
+  <img id="creatorImageViewerImage" src="" alt="Creator project">
+</div>
+
 
 <div class="modal hidden" id="lessonModal">
   <div class="modal-card large">
